@@ -7,7 +7,9 @@
         iframe = document.getElementById('ytplayer'),
         player = document.getElementById('player'),
         playerClose = document.getElementById('player-close'),
-        playerFavorite = document.getElementById('player-favorite');
+        playerFavorite = document.getElementById('player-favorite'),
+        favorites = [],
+        FavId, FavName, favImg, inFavorites;
     
     //search input
     searchBar.addEventListener('keydown', function(e) {
@@ -15,23 +17,52 @@
             getFirstVideos(this.value);
             container.innerHTML = '';
             searchValue = this.value;
+            inFavorites = false;
         }
     });
     
     //listener for all videos
     container.addEventListener('click', function(e) {
+        //video watch
         if(e.target.className == 'video-overlay' || e.target.className == 'video-title') {
             iframe.src = 'https://www.youtube.com/embed/'+e.target.parentNode.id+'?autoplay=1';
             player.classList.remove('off');
+            FavId = e.target.parentNode.id;
+            FavName = e.target.parentNode.childNodes[2].textContent;
+            FavImg = e.target.parentNode.childNodes[1].src;
         }
-        //mozilla
-        if(typeof InstallTrigger !== 'undefined') {
-            if(e.target.className == 'video') {
-                iframe.src = 'https://www.youtube.com/embed/'+e.target.id+'?autoplay=1';
-                player.classList.remove('off');
-            }
+        //favorites remove
+        if(e.target.className == 'fa fa-times remove') {
+            let favoriteId = e.target.parentElement.className.split(' ')[1];
+            let favoritesArray = JSON.parse(localStorage.getItem('favorites'));
+            delete favoritesArray[favoriteId];
+            favoritesArray = favoritesArray.filter(function(n){ return n != undefined });
+            localStorage.setItem('favorites', JSON.stringify(favoritesArray));
+            console.log(e.target.parentNode.remove());
         }
     }, false);
+    
+    //favorites button
+    favBtn.addEventListener('click', function() {
+        let favoritesLoad = JSON.parse(localStorage.getItem('favorites'));
+        if(favoritesLoad != null && favoritesLoad != undefined) {
+            container.innerHTML = '';
+            inFavorites = true;
+            for (let i = 0; i < favoritesLoad.length; i++) {
+                generateVideos(favoritesLoad[i].title, favoritesLoad[i].img, favoritesLoad[i].id, i);
+            }
+        }
+    });
+    
+    //heart button
+    playerFavorite.addEventListener('click', function(e) {
+        favorites.push({
+            title: FavName,
+            img: FavImg,
+            id: FavId
+        });
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+    });
     
     //close iframe
     playerClose.addEventListener('click', function() {
@@ -41,7 +72,7 @@
     
     //ifninite scroll
     window.addEventListener('scroll', function() {
-        if((document.body.scrollHeight - pageYOffset) == document.body.clientHeight) {
+        if((document.body.scrollHeight - pageYOffset) == document.body.clientHeight && inFavorites == false) {
             fetch('https://www.googleapis.com/youtube/v3/search?pageToken='+nextToken+'&part=snippet&maxResults=50&type=video&q='+searchValue+'&key=AIzaSyAt-Br2DTEGJ8D05QL0ssEVNZhkMGyjSKo')
             .then(resp => resp.json())
             .then(resp => {
@@ -67,13 +98,13 @@
     }
     
     //function for generating videos
-    function generateVideos(videoTitle, videoThumbnail, videoId) {
-        let btnVideo = document.createElement('button'),
+    function generateVideos(videoTitle, videoThumbnail, videoId, favoriteNumber) {
+        let btnVideo = document.createElement('div'),
             btnOverlay = document.createElement('div'),
             btnImage = document.createElement('img'),
             btnTitle = document.createElement('span');
         btnVideo.id = videoId;
-        btnVideo.className = 'video';
+        btnVideo.className = 'video '+favoriteNumber;
         btnOverlay.className = 'video-overlay';
         btnVideo.appendChild(btnOverlay);
         btnImage.src = videoThumbnail;
@@ -81,6 +112,11 @@
         btnTitle.className = 'video-title';
         btnTitle.textContent = videoTitle;
         btnVideo.appendChild(btnTitle);
+        if(inFavorites == true) {
+            btnRemove = document.createElement('span');
+            btnRemove.className = 'fa fa-times remove';
+            btnVideo.appendChild(btnRemove);
+        }
         container.appendChild(btnVideo);
     }
     

@@ -133,15 +133,16 @@ body {
     outline: none;
     padding: 0;
     position: relative;
+    font-family: sans-serif;
 }
 
 .video:focus .video-overlay,
 .video:hover .video-overlay {
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.3);
 }
 
 .video-overlay {
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.4);
     width: 100%;
     height: 100%;
     position: absolute;
@@ -156,6 +157,18 @@ body {
     color: #E8E8E8;
     text-align: left;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+.remove {
+    color: #ffffff;
+    font-size: 26px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    cursor: pointer;
 }
 
 @media (max-width: 1280px) {
