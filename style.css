@@ -1,0 +1,224 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #494949;
+    width: 100%;
+    height: 100vh;
+}
+
+.navbar {
+    width: 100%;
+    height: 80px;
+    background-color: #171717;
+    position: fixed;
+    z-index: 1;
+}
+
+.navbar__container {
+    width: 960px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.favorites-btn {
+    background-color: transparent;
+    border: none;
+    color: #FF5D73;
+    font-family: cursive;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+}
+
+.favorites-btb:focus,
+.favorites-btn:hover {
+    color: #CC2A41;
+}
+
+.search-bar {
+    width: 75%;
+    height: 70%;
+    font-size: 28px;
+    background-color: #7C7A7A;
+    border: none;
+    color: #E8E8E8;
+    padding-left: 5px;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.app__wrapper {
+    width: 1050px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.app__container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 100px;
+}
+
+.youtubeplayer.off {
+    display: none;
+}
+
+.youtubeplayer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.playerclose {
+    font-size: 60px;
+    color: white;
+    cursor: pointer;
+}
+
+.playerfavorite {
+    font-size: 50px;
+    color: #FF5D73;
+    cursor: pointer;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(0,0,0,0.5)
+}
+
+.overlay.off {
+    display: none;
+}
+
+.video {
+    width: 320px;
+    height: 180px;
+    cursor: pointer;
+    background-color: transparent;
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    padding: 0;
+    position: relative;
+}
+
+.video:focus .video-overlay,
+.video:hover .video-overlay {
+    background-color: rgba(0,0,0,0.2);
+}
+
+.video-overlay {
+    background-color: rgba(0,0,0,0.3);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.video-title {
+    left: 0;
+    top: 0;
+    position: absolute;
+    font-size: 24px;
+    height: 30px;
+    color: #E8E8E8;
+    text-align: left;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+@media (max-width: 1280px) {
+    .youtubeplayer {
+    }
+    iframe {
+        width: 100%;
+        height: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    iframe {
+        height: 500px;
+    }
+}
+
+@media (max-width: 425px) {
+    iframe {
+        height: 300px;
+    }
+}
+
+@media (max-width: 1050px) {
+    .navbar__container {
+        margin: 0;
+        width: 100%;
+        justify-content: space-around;
+    }
+    .app__wrapper {
+        width: 100%;
+    }
+    .favorites-btn {
+        position: inherit;
+    }
+    .search-bar {
+        width: 80%;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 336px) {
+    .video {
+        width: 100%;
+    }
+    .video img {
+        width: 100%;
+    }
+}
+
+/*--------------------------------------------------*/
+
+/* do not group these rules */
+*::-webkit-input-placeholder {
+    color: #E8E8E8;
+}
+*:-moz-placeholder {
+    /* FF 4-18 */
+    color: #E8E8E8;
+}
+*::-moz-placeholder {
+    /* FF 19+ */
+    color: #E8E8E8;
+}
+*:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #E8E8E8;
+}

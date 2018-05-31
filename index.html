@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="player" class="youtubeplayer off">
+        <iframe id="ytplayer" width="1280" height="720" src="" frameborder="0" allowfullscreen></iframe>
+        <div class="player-menu">
+            <span id="player-close" class="fa fa-times playerclose"></span>
+            <span id="player-favorite" class="fa fa-heart playerfavorite"></span>    
+        </div>
+    </div>
+    <nav class="navbar">
+        <div class="navbar__container">
+            <button id="favorites" class="favorites-btn">Favorites</button>
+            <input id="search" class="search-bar" placeholder="Search...">
+        </div>
+    </nav>
+    <main class="app">
+        <div class="app__wrapper">
+            <div id="container" class="app__container">
+            </div>
+        </div>
+    </main>
+<script src="script.js"></script>
+</body>
+</html>
