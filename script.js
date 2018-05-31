@@ -18,7 +18,7 @@
     
     container.addEventListener('click', function(e) {
         if(e.target.className == 'video-overlay' || e.target.className == 'video-title') {
-            iframe.src = 'http://www.youtube.com/embed/'+e.target.parentNode.id+'?autoplay=1';
+            iframe.src = 'https://www.youtube.com/embed/'+e.target.parentNode.id+'?autoplay=1';
             player.classList.remove('off');
         }
     }, false);
