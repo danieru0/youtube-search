@@ -1,5 +1,5 @@
 (function () {
-    
+
     const favBtn = document.getElementById('favorites'),
           searchBar = document.getElementById('search'),
           container = document.getElementById('container');
@@ -38,7 +38,7 @@
             delete favoritesArray[favoriteId];
             favoritesArray = favoritesArray.filter(function(n){ return n != undefined });
             localStorage.setItem('favorites', JSON.stringify(favoritesArray));
-            console.log(e.target.parentNode.remove());
+            e.target.parentNode.remove();
         }
     }, false);
     
