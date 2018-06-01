@@ -33,12 +33,22 @@
         }
         //favorites remove
         if(e.target.className == 'fa fa-times remove') {
-            let favoriteId = e.target.parentElement.className.split(' ')[1];
-            let favoritesArray = JSON.parse(localStorage.getItem('favorites'));
-            delete favoritesArray[favoriteId];
-            favoritesArray = favoritesArray.filter(function(n){ return n != undefined });
-            localStorage.setItem('favorites', JSON.stringify(favoritesArray));
             e.target.parentNode.remove();
+            favorites = [ ];
+            let videoElements = document.querySelectorAll('.video');
+            if(videoElements.length == 0) {
+                localStorage.removeItem('favorites');
+            } else {
+                for (let i = 0; i < videoElements.length; i++) {
+                    favorites.push({
+                        title: videoElements[i].childNodes[2].textContent,
+                        img: videoElements[i].childNodes[1].src,
+                        id: videoElements[i].id
+                    });
+                    console.log(favorites);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            }
         }
     }, false);
     
@@ -104,7 +114,7 @@
             btnImage = document.createElement('img'),
             btnTitle = document.createElement('span');
         btnVideo.id = videoId;
-        btnVideo.className = 'video '+favoriteNumber;
+        btnVideo.className = 'video ';
         btnOverlay.className = 'video-overlay';
         btnVideo.appendChild(btnOverlay);
         btnImage.src = videoThumbnail;
