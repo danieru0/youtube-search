@@ -66,12 +66,22 @@
     
     //heart button
     playerFavorite.addEventListener('click', function(e) {
-        favorites.push({
-            title: FavName,
-            img: FavImg,
-            id: FavId
-        });
-        localStorage.setItem('favorites', JSON.stringify(favorites));
+        let favoritesLoad = JSON.parse(localStorage.getItem('favorites'));
+        if(favoritesLoad != null && favoritesLoad != undefined) {
+            favoritesLoad.push({
+                title: FavName,
+                img: FavImg,
+                id: FavId
+            });
+            localStorage.setItem('favorites', JSON.stringify(favoritesLoad));
+        } else {
+            favorites.push({ 
+                title: FavName,
+                img: FavImg,
+                id: FavId
+            });
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
     });
     
     //close iframe
