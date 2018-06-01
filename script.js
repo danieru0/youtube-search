@@ -82,7 +82,8 @@
     
     //ifninite scroll
     window.addEventListener('scroll', function() {
-        if((document.body.scrollHeight - pageYOffset) == document.body.clientHeight && inFavorites == false) {
+        let scrollPosition = document.body.scrollHeight - pageYOffset;
+        if(scrollPosition.toFixed(0) == document.body.clientHeight && inFavorites == false) {
             fetch('https://www.googleapis.com/youtube/v3/search?pageToken='+nextToken+'&part=snippet&maxResults=50&type=video&q='+searchValue+'&key=AIzaSyAt-Br2DTEGJ8D05QL0ssEVNZhkMGyjSKo')
             .then(resp => resp.json())
             .then(resp => {
