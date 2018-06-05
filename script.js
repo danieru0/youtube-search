@@ -67,7 +67,13 @@
     //heart button
     playerFavorite.addEventListener('click', function(e) {
         let favoritesLoad = JSON.parse(localStorage.getItem('favorites'));
+        /*if(favoritesLoad.some(item => item.id === FavId)) {
+            return false;
+        }*/
         if(favoritesLoad != null && favoritesLoad != undefined) {
+            if(favoritesLoad.some(item => item.id === FavId)) {
+                return false;
+            }
             favoritesLoad.push({
                 title: FavName,
                 img: FavImg,

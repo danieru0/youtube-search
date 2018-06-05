@@ -100,10 +100,18 @@ body {
     cursor: pointer;
 }
 
+.playerclose:hover {
+    color: #dddddd;
+}
+
 .playerfavorite {
     font-size: 50px;
     color: #FF5D73;
     cursor: pointer;
+}
+
+.playerfavorite:hover {
+    color: #CC2A41;
 }
 
 .overlay {
